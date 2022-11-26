@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {increment,decrement,amountBy} from "./store/slices/counterSlice";
+import {useAppDispatch, useAppSelector} from "./store";
 
 function App() {
-  return (
+    const value = useAppSelector(state => state.counter.value)
+    const dispatch = useAppDispatch()
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <button onClick={() => dispatch(decrement())} >sub</button>
+        {value}
+        <button onClick={() => dispatch(increment())} >add</button>
+        <button onClick={() => dispatch(amountBy(10))} >increment mount by 10</button>
+
     </div>
   );
 }
